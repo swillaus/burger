@@ -2,30 +2,63 @@
 
 
 <!-- Pass in data from server.js -->
-<ol>
+
+{{!-- <ul>
   {{#each burgers}}
-  	<li>
-  		{{!-- <p><span class="label">ID:</span> {{this.id}}</p> --}}
-      <p><span class="label">Burger:</span> {{this.burger_name}}</p>
-      {{!-- <p><span class="label">Deloured:</span> {{this.devoured}}</p> --}}
-
-      {{!-- <button data-id="{{this.id}}" class="delquote">Delete</button> --}}
-
-      {{!-- <a href="/{{this.id}}">Update this quote</a> --}}
-  	</li>
+    {{#unless devoured}}
+      {{> burgers/burger-block devoured=true}}
+    {{/unless}}
   {{/each}}
-</ol>
+</ul>
+
+<ul>
+  {{#each burgers}}
+    {{#unless devoured}}
+      {{> burgers/burger-block devoured=false}}
+    {{/unless}}
+  {{/each}}
+</ul> --}}
 
 
-<form class="create-form">
+<h2>Ready to Eat</h2>
+  {{#each burgers}}
+  {{#unless devoured}}
+  <div>
+    <p><span class="label">Burger:</span> {{this.burger_name}}</p>
 
-  {{!-- <div class="form-group">
-    <label for="auth">Author:</label>
-    <input type="text" id="auth" name="author">
-  </div> --}}
+    <form action="/api/burger/edit" method="post">
+      <input type="hidden" name="id" value="{{this.id}}">
+      <input type="hidden" name="devoured" value="{{this.devoured}}">
+      <input type="submit" value="Eat!">
+    </form>
 
+  </div>
+
+  {{/unless}}
+  {{/each}}
+
+  <h2>Devoured</h2>
+  {{#each burgers}}
+  {{#if devoured}}
+  <div>
+    <p><span class="label">Burger:</span> {{this.burger_name}}</p>
+
+    <form action="/api/burger/edit" method="post">
+      <input type="hidden" name="id" value="{{this.id}}">
+      <input type="hidden" name="devoured" value="{{this.devoured}}">
+      <input type="submit" value="Eat!">
+    </form>
+
+  </div>
+
+  {{/if}}
+  {{/each}}
+
+
+<form class="create-form" action="/api/burgers" method="POST">
   <div class="form-group">
-    <textarea id="quo" name="quote" rows="8" cols="40"></textarea>
+    <input type="hidden" name="devoured" value="0">
+    <textarea id="quo" name="burger_name" rows="8" cols="40"></textarea>
   </div>
 
   <button type="submit">Submit</button>

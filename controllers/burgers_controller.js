@@ -8,15 +8,44 @@ var burger = require("../models/burger.js");
 // Create all our routes and set up logic within those routes where required.
 router.get("/", function(req, res) {
   burger.all(function(data) {
+
+    var filterData = data.filter(function(burger){
+      if(burger.devoured){
+        return true
+      }
+      return false;
+    })
+
+
+
     var hbsObject = {
-      burgers: data
+      burgers: filterData
     };
     console.log(hbsObject);
     res.render("index", hbsObject);
   });
 });
 
-// console.log(router)
+router.post('/api/burger/edit', function(req, res){
+  console.log(req.body)
+  
+  res.redirect("/")
+})
+
+router.post("/api/burgers", function(req, res) {
+  burger.create([
+    "burger_name", "devoured"
+  ], [
+    req.body.burger_name, req.body.devoured
+  ], function(result) {
+    // Send back the ID of the new quote
+    // res.json({ id: result.insertId });
+
+    res.redirect("/")
+  });
+});
+
+
 
 
 // Export routes for server.js to use.

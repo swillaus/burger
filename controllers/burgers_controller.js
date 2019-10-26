@@ -9,19 +9,17 @@ var burger = require("../models/burger.js");
 router.get("/", function(req, res) {
   burger.all(function(data) {
 
-    var filterData = data.filter(function(burger){
-      if(burger.devoured){
-        return true
-      }
-      return false;
-    })
-
-
+    // var filterData = data.filter(function(burger){
+    //   return filterData
+    // })
 
     var hbsObject = {
-      burgers: filterData
+      burgers: data
     };
-    console.log(hbsObject);
+
+    console.log(hbsObject)
+
+    
     res.render("index", hbsObject);
   });
 });

@@ -7,6 +7,12 @@
   background-color: white;
 }
 
+.containers {
+  background-color: white;
+  width: 30%;
+}
+
+
 
 li {
     padding: 5px;

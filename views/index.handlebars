@@ -1,45 +1,47 @@
 <h1>Eat Da Burger</h1>
 
-<img src="/public/assets/img/burger.png" alt="burger">
+{{!-- <img src="/public/assets/img/burger.png" alt="burger"> --}}
+<div>
+  <div id="notDevoured">
+    <h2>Ready to Eat</h2>
+    {{#each burgers}}
+    {{#unless devoured}}
+    <div class="containers">
+      <p><span class="label">Burger:</span> {{this.burger_name}}</p>
 
-<div id="notDevoured">
-  <h2>Ready to Eat</h2>
-  {{#each burgers}}
-  {{#unless devoured}}
-  <div class="containers">
-    <p><span class="label">Burger:</span> {{this.burger_name}}</p>
+      <form action="/api/burgers/3" method="post" id="formButton">
+        <input type="hidden" name="id" value="{{this.id}}">
+        <input type="hidden" name="devoured" value="{{this.devoured}}">
+        <input type="submit" value="Eat!">
+      </form>
 
-    <form action="/api/burger/edit" method="post">
-      <input type="hidden" name="id" value="{{this.id}}">
-      <input type="hidden" name="devoured" value="{{this.devoured}}">
-      <input type="submit" value="Eat!">
-    </form>
+    </div>
 
+    <br>
+
+    {{/unless}}
+    {{/each}}
   </div>
 
-  {{/unless}}
-  {{/each}}
-</div>
+  <div id="devoured">
+    <h2>Devoured</h2>
+    {{#each burgers}}
+    {{#if devoured}}
+    <div>
+      <p><span class="label">Burger:</span> {{this.burger_name}}</p>
+{{!-- 
+      <form action="/api/burger/edit" method="post">
+        <input type="hidden" name="id" value="{{this.id}}">
+        <input type="hidden" name="devoured" value="{{this.devoured}}">
+      </form> --}}
 
-<div id="devoured">
-  <h2>Devoured</h2>
-  {{#each burgers}}
-  {{#if devoured}}
-  <div>
-    <p><span class="label">Burger:</span> {{this.burger_name}}</p>
+    </div>
 
-    <form action="/api/burger/edit" method="post">
-      <input type="hidden" name="id" value="{{this.id}}">
-      <input type="hidden" name="devoured" value="{{this.devoured}}">
-    </form>
+    {{/if}}
+    {{/each}}
 
   </div>
-
-  {{/if}}
-  {{/each}}
-
 </div>
-
 
 <form class="create-form" action="/api/burgers" method="POST">
   <div class="form-group">

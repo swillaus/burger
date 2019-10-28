@@ -1,6 +1,6 @@
 <h1>Eat Da Burger</h1>
 
-{{!-- <img src="/public/assets/img/burger.png" alt="burger"> --}}
+<img src="https://i.pinimg.com/736x/01/1d/1d/011d1d429a11a56939f6b4c2831f1061.jpg" alt="burger">
 <div>
   <div id="notDevoured">
     <h2>Ready to Eat</h2>
@@ -9,10 +9,11 @@
     <div class="containers">
       <p><span class="label">Burger:</span> {{this.burger_name}}</p>
 
-      <form action="/api/burgers/3" method="post" id="formButton">
-        <input type="hidden" name="id" value="{{this.id}}">
-        <input type="hidden" name="devoured" value="{{this.devoured}}">
-        <input type="submit" value="Eat!">
+
+      <form action="/api/burgers/update?" method="POST" id="formButton">
+        <input type="hidden" name="id" type="text" value="{{this.id}}">
+        {{!-- <input type="hidden" name="devoured" value="1"> --}}
+        <input type="submit" value="Devour It">
       </form>
 
     </div>
@@ -29,11 +30,6 @@
     {{#if devoured}}
     <div>
       <p><span class="label">Burger:</span> {{this.burger_name}}</p>
-{{!-- 
-      <form action="/api/burger/edit" method="post">
-        <input type="hidden" name="id" value="{{this.id}}">
-        <input type="hidden" name="devoured" value="{{this.devoured}}">
-      </form> --}}
 
     </div>
 
@@ -43,11 +39,14 @@
   </div>
 </div>
 
+
 <form class="create-form" action="/api/burgers" method="POST">
   <div class="form-group">
     <input type="hidden" name="devoured" value="0">
-    <textarea id="quo" name="burger_name" rows="8" cols="40"></textarea>
+    <textarea id="quo" name="burger_name" rows="8" cols="40"  placeholder="Input burger name"></textarea>
   </div>
 
   <button type="submit">Submit</button>
+
+  <h4>Click submit to save your burger and get ready to 'Devour It!'</h43>
 </form>
